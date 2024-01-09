@@ -1,0 +1,95 @@
+WARNING - 2023-12-20 07:25:33 --> [DEPRECATED] Creation of dynamic property App\Controllers\Home::$barangModel is deprecated in APPPATH\Controllers\Home.php on line 12.
+ 1 SYSTEMPATH\CodeIgniter.php(914): App\Controllers\Home->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(493): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('D:\\Robeth\\Download\\fitnesia\\public\\index.php')
+INFO - 2023-12-20 07:25:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-12-20 07:26:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2023-12-20 07:26:33 --> Error connecting to the database: mysqli_sql_exception: No connection could be made because the target machine actively refused it in D:\Robeth\Download\fitnesia\vendor\codeigniter4\framework\system\Database\MySQLi\Connection.php:184
+Stack trace:
+#0 D:\Robeth\Download\fitnesia\vendor\codeigniter4\framework\system\Database\MySQLi\Connection.php(184): mysqli->real_connect('localhost', 'root', Object(SensitiveParameterValue), 'fitnesia', 3306, '', 0)
+#1 D:\Robeth\Download\fitnesia\vendor\codeigniter4\framework\system\Database\BaseConnection.php(392): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 D:\Robeth\Download\fitnesia\vendor\codeigniter4\framework\system\Database\BaseConnection.php(575): CodeIgniter\Database\BaseConnection->initialize()
+#3 D:\Robeth\Download\fitnesia\vendor\codeigniter4\framework\system\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT 1\nFROM `...', Array, false)
+#4 D:\Robeth\Download\fitnesia\vendor\codeigniter4\framework\system\Validation\StrictRules\Rules.php(212): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\Robeth\Download\fitnesia\vendor\codeigniter4\framework\system\Validation\Validation.php(311): CodeIgniter\Validation\StrictRules\Rules->is_unique('faidh@gmail.com', 'email', Array, NULL, 'email')
+#6 D:\Robeth\Download\fitnesia\vendor\codeigniter4\framework\system\Validation\Validation.php(197): CodeIgniter\Validation\Validation->processRules('email', 'email', 'faidh@gmail.com', Array, Array)
+#7 D:\Robeth\Download\fitnesia\vendor\codeigniter4\framework\system\BaseModel.php(1495): CodeIgniter\Validation\Validation->run(Array, NULL, NULL)
+#8 D:\Robeth\Download\fitnesia\vendor\codeigniter4\framework\system\BaseModel.php(751): CodeIgniter\BaseModel->validate(Array)
+#9 D:\Robeth\Download\fitnesia\vendor\codeigniter4\framework\system\Model.php(715): CodeIgniter\BaseModel->insert(Array, false)
+#10 D:\Robeth\Download\fitnesia\vendor\codeigniter4\framework\system\BaseModel.php(698): CodeIgniter\Model->insert(Array, false)
+#11 D:\Robeth\Download\fitnesia\app\Controllers\Register.php(35): CodeIgniter\BaseModel->save(Array)
+#12 D:\Robeth\Download\fitnesia\vendor\codeigniter4\framework\system\CodeIgniter.php(942): App\Controllers\Register->store()
+#13 D:\Robeth\Download\fitnesia\vendor\codeigniter4\framework\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Register))
+#14 D:\Robeth\Download\fitnesia\vendor\codeigniter4\framework\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#15 D:\Robeth\Download\fitnesia\public\index.php(79): CodeIgniter\CodeIgniter->run()
+#16 D:\Robeth\Download\fitnesia\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(47): require_once('D:\\Robeth\\Downl...')
+#17 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: No connection could be made because the target machine actively refused it in D:\Robeth\Download\fitnesia\vendor\codeigniter4\framework\system\Database\MySQLi\Connection.php:229
+Stack trace:
+#0 D:\Robeth\Download\fitnesia\vendor\codeigniter4\framework\system\Database\BaseConnection.php(392): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 D:\Robeth\Download\fitnesia\vendor\codeigniter4\framework\system\Database\BaseConnection.php(575): CodeIgniter\Database\BaseConnection->initialize()
+#2 D:\Robeth\Download\fitnesia\vendor\codeigniter4\framework\system\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT 1\nFROM `...', Array, false)
+#3 D:\Robeth\Download\fitnesia\vendor\codeigniter4\framework\system\Validation\StrictRules\Rules.php(212): CodeIgniter\Database\BaseBuilder->get()
+#4 D:\Robeth\Download\fitnesia\vendor\codeigniter4\framework\system\Validation\Validation.php(311): CodeIgniter\Validation\StrictRules\Rules->is_unique('faidh@gmail.com', 'email', Array, NULL, 'email')
+#5 D:\Robeth\Download\fitnesia\vendor\codeigniter4\framework\system\Validation\Validation.php(197): CodeIgniter\Validation\Validation->processRules('email', 'email', 'faidh@gmail.com', Array, Array)
+#6 D:\Robeth\Download\fitnesia\vendor\codeigniter4\framework\system\BaseModel.php(1495): CodeIgniter\Validation\Validation->run(Array, NULL, NULL)
+#7 D:\Robeth\Download\fitnesia\vendor\codeigniter4\framework\system\BaseModel.php(751): CodeIgniter\BaseModel->validate(Array)
+#8 D:\Robeth\Download\fitnesia\vendor\codeigniter4\framework\system\Model.php(715): CodeIgniter\BaseModel->insert(Array, false)
+#9 D:\Robeth\Download\fitnesia\vendor\codeigniter4\framework\system\BaseModel.php(698): CodeIgniter\Model->insert(Array, false)
+#10 D:\Robeth\Download\fitnesia\app\Controllers\Register.php(35): CodeIgniter\BaseModel->save(Array)
+#11 D:\Robeth\Download\fitnesia\vendor\codeigniter4\framework\system\CodeIgniter.php(942): App\Controllers\Register->store()
+#12 D:\Robeth\Download\fitnesia\vendor\codeigniter4\framework\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Register))
+#13 D:\Robeth\Download\fitnesia\vendor\codeigniter4\framework\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#14 D:\Robeth\Download\fitnesia\public\index.php(79): CodeIgniter\CodeIgniter->run()
+#15 D:\Robeth\Download\fitnesia\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(47): require_once('D:\\Robeth\\Downl...')
+#16 {main}
+CRITICAL - 2023-12-20 07:26:33 --> Unable to connect to the database.
+Main connection [MySQLi]: No connection could be made because the target machine actively refused it
+in SYSTEMPATH\Database\BaseConnection.php on line 428.
+ 1 SYSTEMPATH\Database\BaseConnection.php(575): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT 1
+FROM `users`
+WHERE `email` = :email:
+ LIMIT 1', [...], false)
+ 3 SYSTEMPATH\Validation\StrictRules\Rules.php(212): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH\Validation\Validation.php(311): CodeIgniter\Validation\StrictRules\Rules->is_unique('faidh@gmail.com', 'email', [...], null, 'email')
+ 5 SYSTEMPATH\Validation\Validation.php(197): CodeIgniter\Validation\Validation->processRules('email', 'email', 'faidh@gmail.com', [...], [...])
+ 6 SYSTEMPATH\BaseModel.php(1495): CodeIgniter\Validation\Validation->run([...], null, null)
+ 7 SYSTEMPATH\BaseModel.php(751): CodeIgniter\BaseModel->validate([...])
+ 8 SYSTEMPATH\Model.php(715): CodeIgniter\BaseModel->insert([...], false)
+ 9 SYSTEMPATH\BaseModel.php(698): CodeIgniter\Model->insert([...], false)
+10 APPPATH\Controllers\Register.php(35): CodeIgniter\BaseModel->save([...])
+11 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\Register->store()
+12 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Register))
+13 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+14 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+15 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('D:\\Robeth\\Download\\fitnesia\\public\\index.php')
+INFO - 2023-12-20 07:26:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-12-20 07:26:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-12-20 07:27:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-12-20 07:27:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-12-20 07:27:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-12-20 07:27:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-12-20 07:39:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-12-20 07:39:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2023-12-20 07:39:52 --> [DEPRECATED] Creation of dynamic property App\Controllers\Home::$barangModel is deprecated in APPPATH\Controllers\Home.php on line 12.
+ 1 SYSTEMPATH\CodeIgniter.php(914): App\Controllers\Home->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(493): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('D:\\Robeth\\Download\\fitnesia\\public\\index.php')
+WARNING - 2023-12-20 07:40:27 --> [DEPRECATED] Creation of dynamic property App\Controllers\Home::$barangModel is deprecated in APPPATH\Controllers\Home.php on line 12.
+ 1 SYSTEMPATH\CodeIgniter.php(914): App\Controllers\Home->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(493): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('D:\\Robeth\\Download\\fitnesia\\public\\index.php')
+WARNING - 2023-12-20 07:40:34 --> [DEPRECATED] Creation of dynamic property App\Controllers\Home::$barangModel is deprecated in APPPATH\Controllers\Home.php on line 12.
+ 1 SYSTEMPATH\CodeIgniter.php(914): App\Controllers\Home->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(493): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('D:\\Robeth\\Download\\fitnesia\\public\\index.php')

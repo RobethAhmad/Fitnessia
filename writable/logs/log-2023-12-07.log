@@ -1,0 +1,36 @@
+CRITICAL - 2023-12-07 14:21:16 --> Undefined variable $token
+in APPPATH\Views\pricing.php on line 15.
+ 1 APPPATH\Views\pricing.php(15): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $token', 'D:\\Robeth\\Download\\fitnesia\\app\\Views\\pricing.php', 15)
+ 2 SYSTEMPATH\View\View.php(228): include('D:\\Robeth\\Download\\fitnesia\\app\\Views\\pricing.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('pricing', [], true)
+ 5 APPPATH\Controllers\Pricing.php(9): view('pricing')
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\Pricing->index()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pricing))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('D:\\Robeth\\Download\\fitnesia\\public\\index.php')
+CRITICAL - 2023-12-07 14:47:04 --> Undefined variable $token
+in APPPATH\Views\pricing.php on line 97.
+ 1 APPPATH\Views\pricing.php(97): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $token', 'D:\\Robeth\\Download\\fitnesia\\app\\Views\\pricing.php', 97)
+ 2 SYSTEMPATH\View\View.php(228): include('D:\\Robeth\\Download\\fitnesia\\app\\Views\\pricing.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('pricing', [], true)
+ 5 APPPATH\Controllers\Pricing.php(9): view('pricing')
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\Pricing->index()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pricing))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('D:\\Robeth\\Download\\fitnesia\\public\\index.php')
+CRITICAL - 2023-12-07 14:47:04 --> Undefined variable $token
+in APPPATH\Views\pricing.php on line 97.
+ 1 APPPATH\Views\pricing.php(97): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $token', 'D:\\Robeth\\Download\\fitnesia\\app\\Views\\pricing.php', 97)
+ 2 SYSTEMPATH\View\View.php(228): include('D:\\Robeth\\Download\\fitnesia\\app\\Views\\pricing.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('pricing', [], true)
+ 5 APPPATH\Controllers\Pricing.php(9): view('pricing')
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\Pricing->index()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pricing))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('D:\\Robeth\\Download\\fitnesia\\public\\index.php')
