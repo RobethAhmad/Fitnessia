@@ -15,10 +15,9 @@ class Filters extends BaseConfig
      * Configures aliases for Filter classes to
      * make reading things nicer and simpler.
      *
-     * @var array<string, string>
-     * @phpstan-var array<string, class-string>
+     * @var array
      */
-    public array $aliases = [
+    public $aliases = [
         'csrf'          => CSRF::class,
         'toolbar'       => DebugToolbar::class,
         'honeypot'      => Honeypot::class,
@@ -32,14 +31,14 @@ class Filters extends BaseConfig
      * List of filter aliases that are always
      * applied before and after every request.
      *
-     * @var array<string, array<string, array<string, string>>>|array<string, array<string>>
-     * @phpstan-var array<string, list<string>>|array<string, array<string, array<string, string>>>
+     * @var array
      */
-    public array $globals = [
+    public $globals = [
         'before' => [
             // 'honeypot',
             // 'csrf',
             // 'invalidchars',
+            'authcookie'
         ],
         'after' => [
             'toolbar',
@@ -57,9 +56,11 @@ class Filters extends BaseConfig
      *
      * If you use this, you should disable auto-routing because auto-routing
      * permits any HTTP method to access a controller. Accessing the controller
-     * with a method you don't expect could bypass the filter.
+     * with a method you don’t expect could bypass the filter.
+     *
+     * @var array
      */
-    public array $methods = [];
+    public $methods = [];
 
     /**
      * List of filter aliases that should run on any
@@ -67,6 +68,8 @@ class Filters extends BaseConfig
      *
      * Example:
      * 'isLoggedIn' => ['before' => ['account/*', 'profiles/*']]
+     *
+     * @var array
      */
-    public array $filters = [];
+    public $filters = [];
 }

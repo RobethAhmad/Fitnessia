@@ -13,11 +13,11 @@ class Auth implements FilterInterface
     {
 
         if (is_array($arguments) AND $arguments[0] == 'page') {
-            if (session()->auth) {
+            if (session()->Auth) {
                 return redirect()->to(base_url(''));       
             }
         }else{
-            if (!session()->auth) {
+            if (!session()->Auth) {
                 // if ajax request
                 if ($request->isAJAX()) {
                     http_response_code(400);     
