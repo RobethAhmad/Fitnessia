@@ -72,6 +72,7 @@ class Auth extends BaseController
         $data = [
             'id' => $user['id'],
             'username' => $user['username'],            
+                       
         ];
 
         // set session
@@ -168,22 +169,50 @@ class Auth extends BaseController
 
     public function updateUserLevel()
     {
-        // Ambil ID pengguna dari sesi atau dari data yang diperlukan
-        $userId = session()->get('auth')['id'];
 
+        $user_Id = session()->get('auth')['id'];
+        $user_Model = new \App\Models\User(); 
+        $users = $user_Model->find($userId);
+        // Pastikan menggunakan model yang sesuai dengan struktur basis data
         // Lakukan pembaruan level pengguna
         // Contoh: Ubah level pengguna menjadi 'premium'
-        $userModel = new \App\Models\User(); // Pastikan menggunakan model yang sesuai dengan struktur basis data
-        $user = $userModel->find($userId);
         
-        if ($user) {
-            $userModel->where('id', $userId)->set(['leveluser' => "1"])->update();
+        if ($users) {
+            $user_Model->where('id', $user_Id)->set(['leveluser' => "1"])->update();
             // atau $user->leveluser = 'premium'; $userModel->save($user);
         }
 
-        // Berikan respons sesuai kebutuhan (contohnya bisa respons JSON)
-        // return $this->response->setJSON(['message' => 'User level updated']);
-        return view(base_url('/dashadmin'));
+
+        // Menerima data JSON dari permintaan POST
+        $jsonData = file_get_contents('php://input');
+        $resultData = json_decode($jsonData, true);
+
+        // Mengambil data yang diinginkan
+        $transactionId = $resultData['transaction_id'];
+        $transactionTime = $resultData['transaction_time'];
+        $paymentType = $resultData['payment_type'];
+        $transactionStatus = $resultData['transaction_status'];
+
+         // Data yang akan disimpan
+         $data = [
+            'transaction_id' => $transactionId,
+            'transaction_status' => 'success',
+            'gross_amount' => 100000,
+            'payment_type' =>  $paymentType,
+            'transaction_time' => date( $transactionTime),
+            'id_produk' => 1, // Gantilah dengan ID produk yang sesuai
+            'id_user' => 2 // Gantilah dengan ID user yang sesuai
+        ];
+
+        // Membuat objek model transaksi
+        $transaksiModel = new TransaksiModel();
+
+        // Menyimpan data ke tabel transaksi
+        $transaksiModel->insert($data);
+
+        
+        // Redirect atau tampilkan pesan sukses sesuai dengan kebutuhan Anda
+        return redirect()->to(base_url('/dashadmin'))->with('success', 'Data transaksi berhasil disimpan.');
     }
 
 

@@ -56,9 +56,37 @@
                         <nav class="primary-menu">
 
                             <ul class="menu-container one-page-menu">
-                                <li class="menu-item current"><a class="menu-link" href="<?= base_url('dashadmin')  ?>">
+                                <?php
+                                // Cek apakah ada sesi
+                                $authSession = session()->get('auth');
+
+                                // Jika tidak ada sesi, sembunyikan tombol beranda
+                                $displayStyle = (!$authSession) ? 'style="display: none;"' : '';
+
+                                // Jika ada sesi, ambil ID user dan level user
+                                if ($authSession) {
+                                    $userId = $authSession['id'];
+
+                                    // Buat instance model User
+                                    $userModel = new \App\Models\User();
+
+                                    // Ambil data user berdasarkan ID user
+                                    $userData = $userModel->find($userId);
+
+                                    // Ambil level user dari data user
+                                    $userLevel = ($userData) ? $userData['leveluser'] : 0;
+
+                                    // Tentukan base URL berdasarkan level user
+                                    $baseURL = ($userLevel != 0 && $userLevel != 4) ? 'dashUser' : 'dashadmin';
+                                }
+                                ?>
+
+                                <li class="menu-item current">
+                                    <a class="menu-link" href="<?= base_url($baseURL ?? '') ?>" <?= $displayStyle ?>>
                                         <div>Beranda</div>
-                                    </a></li>
+                                    </a>
+                                </li>
+                                </a></li>
                                 <!-- <li class="menu-item"><a class="menu-link" href="#" data-href="#section-features"><div>Features</div></a></li> -->
                                 <li class="menu-item"><a class="menu-link" href="#" data-scrollto="#section-Pricing">
                                         <div>Harga</div>
@@ -151,7 +179,7 @@
                                                     class="button button-3d button-red button-xlarge mb-0">Beli
                                                     Sekarang</a>
                                                 <?php else: ?>
-                                                <button id="pay-button" target="_blank" data-scrollto="#section-pricing"
+                                                <button id="paybutton" target="_blank" data-scrollto="#section-pricing"
                                                     class="button button-3d button-red button-xlarge mb-0">Beli
                                                     Sekarang</button>
                                                 <?php endif ?>
@@ -178,7 +206,7 @@
                                                     class="button button-3d button-red button-xlarge mb-0">Beli
                                                     Sekarang</a>
                                                 <?php else: ?>
-                                                <button id="pay-button" target="_blank" data-scrollto="#section-pricing"
+                                                <button id="paybutton" target="_blank" data-scrollto="#section-pricing"
                                                     class="button button-3d button-red button-xlarge mb-0">Beli
                                                     Sekarang</button>
                                                 <?php endif ?>
@@ -209,6 +237,7 @@
                                                     class="button button-3d button-red button-xlarge mb-0">Beli
                                                     Sekarang</button>
                                                 <?php endif ?>
+                                                <!-- <button id="TEST">TESTTTTTTT</button> -->
                                             </div>
                                         </div>
                                     </div>
@@ -332,33 +361,48 @@
     <!-- Tambahkan tombol di dalam view homepage -->
 
     <!-- Sisipkan script JavaScript -->
-    <!-- <script>
-    document.getElementById('updateLevelButton').onclick = function() {
-        fetch('/update-user-level', {
+    <script>
+    document.getElementById('TEST').onclick = function() {
+        fetch('/simpanData', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    // Jika kamu menggunakan CSRF protection di CodeIgniter 4, tambahkan header ini dengan token CSRF
-                    // 'X-CSRF-TOKEN': 'token_csrf',
                 },
-                // Jika kamu perlu mengirimkan data ke server, tambahkan bagian body
-                // body: JSON.stringify({ key: 'value' }),
+                body: JSON.stringify(result),
             })
-            .then(response => {
-                if (response.ok) {
-                    return response.json();
-                }
-                throw new Error('Network response was not ok.');
-            })
+            .then(response => response.json())
             .then(data => {
-                console.log(data); // Tampilkan data respons jika perlu
-                // Lakukan hal lain setelah berhasil memperbarui level pengguna
+                console.log('Response from server:', data);
             })
             .catch(error => {
-                console.error('There has been a problem with your fetch operation:', error);
+                console.error('Error sending data to server:', error);
             });
+        // Panggil URL untuk memperbarui level pengguna
+        // fetch('/update-user-level', {
+        //         method: 'POST',
+        //         headers: {
+        //             'Content-Type': 'application/json',
+        //             // Jika kamu menggunakan CSRF protection di CodeIgniter 4, tambahkan header ini dengan token CSRF
+        //             // 'X-CSRF-TOKEN': 'token_csrf',
+        //         },
+        //         // Jika kamu perlu mengirimkan data ke server, tambahkan bagian body
+        //         // body: JSON.stringify({ key: 'value' }),
+        //     })
+        //     .then(response => {
+        //         if (response.ok) {
+        //             return response.json();
+        //         }
+        //         throw new Error('Network response was not ok.');
+        //     })
+        //     .then(data => {
+        //         console.log(data); // Tampilkan data respons jika perlu
+        //         // Lakukan hal lain setelah berhasil memperbarui level pengguna
+        //     })
+        //     .catch(error => {
+        //         console.error('There has been a problem with your fetch operation:', error);
+        //     });
     };
-    </script> -->
+    </script>
 
 
 
@@ -461,31 +505,46 @@
                 /* You may add your own js here, this is just example */
                 // document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
                 console.log(JSON.stringify(result, null, 2));
-                // Panggil URL untuk memperbarui level pengguna
-                fetch('/update-user-level', {
+
+                fetch('/simpanData', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
-                            // Jika kamu menggunakan CSRF protection di CodeIgniter 4, tambahkan header ini dengan token CSRF
-                            // 'X-CSRF-TOKEN': 'token_csrf',
                         },
-                        // Jika kamu perlu mengirimkan data ke server, tambahkan bagian body
-                        // body: JSON.stringify({ key: 'value' }),
+                        body: JSON.stringify(result, null, 2),
                     })
-                    .then(response => {
-                        if (response.ok) {
-                            return response.json();
-                        }
-                        throw new Error('Network response was not ok.');
-                    })
+                    .then(response => response.json())
                     .then(data => {
-                        console.log(data); // Tampilkan data respons jika perlu
-                        return view('/dashadmin')
-                        // Lakukan hal lain setelah berhasil memperbarui level pengguna
+                        console.log('Response from server:', data);
                     })
                     .catch(error => {
-                        console.error('There has been a problem with your fetch operation:', error);
+                        console.error('Error sending data to server:', error);
                     });
+                // Panggil URL untuk memperbarui level pengguna
+                // fetch('/update-user-level', {
+                //         method: 'POST',
+                //         headers: {
+                //             'Content-Type': 'application/json',
+                //             // Jika kamu menggunakan CSRF protection di CodeIgniter 4, tambahkan header ini dengan token CSRF
+                //             // 'X-CSRF-TOKEN': 'token_csrf',
+                //         },
+                //         // Jika kamu perlu mengirimkan data ke server, tambahkan bagian body
+                //         body: JSON.stringify(result),
+                //     })
+                //     .then(response => {
+                //         if (response.ok) {
+                //             return response.json();
+                //         }
+                //         throw new Error('Network response was not ok.');
+                //     })
+                //     .then(data => {
+                //         console.log(data); // Tampilkan data respons jika perlu
+                //         return view('/dashadmin')
+                //         // Lakukan hal lain setelah berhasil memperbarui level pengguna
+                //     })
+                //     .catch(error => {
+                //         console.error('There has been a problem with your fetch operation:', error);
+                //     });
 
             },
             // Optional
@@ -501,21 +560,21 @@
         });
     };
 
-    $('#paybutton').click(function(e) {
-        e.preventDefault();
-        $.ajax({
-            type: "post",
-            url: "/homepage",
-            data: {
+    // $('#paybutton').click(function(e) {
+    //     e.preventDefault();
+    //     $.ajax({
+    //         type: "post",
+    //         url: "/homepage",
+    //         data: {
 
-            },
-            dataType: "json",
-            success: function(response) {
+    //         },
+    //         dataType: "json",
+    //         success: function(response) {
 
-            }
+    //         }
 
-        });
-    });
+    //     });
+    // });
     </script>
 
 

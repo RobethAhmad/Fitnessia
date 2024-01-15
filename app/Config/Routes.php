@@ -20,11 +20,15 @@ $routes->get('/homepage', 'homepage::index');
     
 // });
 $routes->post('/update-user-level', 'Auth::updateUserLevel');
+$routes->post('/simpanData', 'Homepage::simpanData');
 $routes->get('/pemula', 'Homepage::class1');
 $routes->get('/menengah', 'Homepage::class2');
 $routes->get('/ahli', 'Homepage::class3');
+$routes->get('/tabel', 'Homepage::tabel');
+$routes->get('/tabelUser', 'Homepage::tabelUser');
 
 $routes->get('/dashadmin', 'Homepage::dashadmin');
+$routes->get('/dashUser', 'Homepage::dashUser');
 
 // route auth with filter auth:page
 $routes->group('', ['filter' => 'auth:page'] ,function ($routes) {

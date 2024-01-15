@@ -10,10 +10,10 @@ class Homepage extends BaseController
     public function index(): string
     {      
         $produkModel = new \App\Models\Product();
-        $produkId = 1;
+        $produkId = 3;
         $produk = $produkModel->find($produkId);
         $produkName = $produk['name'];
-        $produkPrice = $produk['price'];
+        $produkPrice = 1;//$produk['price']
 
         $items = array(
             array(
@@ -69,41 +69,42 @@ class Homepage extends BaseController
         );
         
         $data = [
-            'snapToken' => \Midtrans\Snap::getSnapToken($params)
+            'snapToken' => \Midtrans\Snap::getSnapToken($params),
+            'order_id' => time(),
+            'gross_amount' => $produkPrice,
+            'id'       => $produkId,
+            'price'    => $produkPrice,
+            'quantity' => 1,
+            'name'     => $produkName,
+            'first_name' => $username,
+            'last_name' => '',
+            'email' => $email,
+            'phone' => ''
         ];
         
         return view('homepage', $data);
     }
 
-    public function payMidtrans()
+    public function tabel()
     {
-       // Set your Merchant Server Key
-       \Midtrans\Config::$serverKey = 'Mid-server-WoTbnlo_sJ7HleYkuWOiVG3J';
-       // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
-       \Midtrans\Config::$isProduction = true;
-       // Set sanitization on (default)
-       \Midtrans\Config::$isSanitized = true;
-       // Set 3DS transaction for credit card to true
-       \Midtrans\Config::$is3ds = true;
+        $transaksiModel = new \App\Models\Transaksi();
+        $data['transaksi'] = $transaksiModel->getTransaksiData();
 
-       $params = array(
-           'transaction_details' => array(
-               'order_id' => time(),
-               'gross_amount' => 1,
-           ),
-           'customer_details' => array(
-               'first_name' => 'Abraham',
-               'last_name' => 'Abel',
-               'email' => 'budi.pra@example.com',
-               'phone' => '08111222333',
-           ),
-       );
-       
-       $data = [
-           'snapToken' => \Midtrans\Snap::getSnapToken($params)
-       ];
-       
-       return view('homepage', $data);
+        return view('/tabel', $data);
+    }
+    public function tabelUser()
+    {
+        $transaksiModel = new \App\Models\Transaksi();
+            // Ambil ID user dari sesi
+        $userId = session()->get('auth')['id'];
+
+        // Ambil data transaksi berdasarkan ID user
+        $data['transaksi'] = $transaksiModel->getTransaksiByUserId($userId);
+
+
+        // Tampilkan view dengan data yang sudah diambil
+        return view('/tabelUser', $data);
+
     }
 
 
@@ -112,6 +113,12 @@ class Homepage extends BaseController
         // return view('home');
         
         return view('dashadmin');
+    }
+    public function dashUser()
+    {
+        // return view('home');
+        
+        return view('dashUser');
     }
     public function class1()
     {
@@ -126,5 +133,52 @@ class Homepage extends BaseController
     public function class3()
     {
         return view('ahli');
+    }
+
+    public function simpanData()
+    {
+        $user_Id = session()->get('auth')['id'];
+        // // Menerima data JSON dari permintaan POST
+        $jsonData = file_get_contents('php://input');
+        $resultData = json_decode($jsonData, true);
+
+        // Mengambil data yang diinginkan
+        $transactionId = $resultData['transaction_id'];
+        $transactionTime = $resultData['transaction_time'];
+        $paymentType = $resultData['payment_type'];
+        $transactionStatus = $resultData['transaction_status'];
+        $grossAmount = $resultData['gross_amount'];
+
+         // Data yang akan disimpan
+         $data = [
+            'transaction_id' =>  $transactionId,
+            'transaction_status' => $transactionStatus,
+            'gross_amount' => $grossAmount,
+            'payment_type' =>   $paymentType,
+            'transaction_time' => date($transactionTime),
+            'produk_id' => 1, // Gantilah dengan ID produk yang sesuai
+            'user_id' => $user_Id // Gantilah dengan ID user yang sesuai
+        ];
+
+        // Membuat objek model transaksi
+        $transaksiModel = new \App\Models\Transaksi();
+
+        // Menyimpan data ke tabel transaksi
+        $transaksiModel->insert($data);
+
+        
+
+        // Lakukan pembaruan level pengguna
+        // Contoh: Ubah level pengguna menjadi 'premium'
+        $user_Model = new \App\Models\User(); // Pastikan menggunakan model yang sesuai dengan struktur basis data
+        $users = $user_Model->find($user_Id);
+        if ($users) {
+            $user_Model->where('id', $user_Id)->set(['leveluser' => "1"])->update();
+            // atau $user->leveluser = 'premium'; $userModel->save($user);
+        }
+
+        // Redirect atau tampilkan pesan sukses sesuai dengan kebutuhan Anda
+        return redirect()->to(base_url('/dashadmin'))->with('success', 'Data transaksi berhasil disimpan.');
+  
     }
 }
