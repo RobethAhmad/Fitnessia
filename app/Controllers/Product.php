@@ -29,9 +29,6 @@ class Product extends BaseController
         'name' => [
         'rules' => 'required'
         ],
-        'category' => [
-        'rules' => 'required'
-        ],
         'price' => [
         'rules' => 'required'
         ]            
@@ -46,63 +43,8 @@ class Product extends BaseController
                 ])); 
         }           
 
-        $data['name'] = $this->request->getPost('name');
-        $data['category'] = $this->request->getPost('category');        
+        $data['name'] = $this->request->getPost('name');      
         $data['price'] = $this->request->getPost('price');    
-
-        // ======== photo handle
-
-        // if create and not have photo
-        if (!$is_update AND !$this->request->getFile('photo')->isValid()) {
-            die(json_encode([
-                'status' => false,
-                'response' => 'photo required'
-                ])); 
-        }        
-
-        // check new photo exist
-        $photo = $this->request->getFile('photo');      
-        if ($photo->isValid()) {
-
-            // validate input file
-            $validationRule = [
-            'photo' => [
-            'rules' => 'uploaded[photo]'
-            . '|is_image[photo]'
-            . '|mime_in[photo,image/jpg,image/jpeg,image/gif,image/png,image/webp]'
-            . '|max_size[photo,100]'
-            . '|max_dims[photo,1024,768]'
-            ]                
-            ];        
-
-            if (!$this->validate($validationRule)) {
-                $error = $this->validator->getErrors();
-                $error_val = array_values($error);
-                die(json_encode([
-                    'status' => false,
-                    'response' => $error_val[0]
-                    ])); 
-            }             
-
-            $file_name = $data['name'].'.'.$photo->getClientExtension();
-            $dir_upload = './uploads/';
-            $file_des = $dir_upload.$file_name;
-
-            // if update
-            if ($is_update) {
-                // delete previous photo
-                $prev_photo = $this->request->getPost('previous_photo');
-                if (file_exists($dir_upload.$prev_photo)) {
-                    unlink($dir_upload.$prev_photo);
-                }
-            }
-
-            // then upload
-            $photo->move('./uploads/', $file_name);
-            $data['photo'] = $file_name;    
-        }   
-
-        // ======== photo handle
 
         return $data;        
     }

@@ -12,6 +12,8 @@ class Product extends Model
     protected $returnType       = 'array';
     protected $protectFields    = false;
  
+    protected $allowedFields    = ['name', 'price'];
+
     // Dates
     protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';
@@ -24,9 +26,7 @@ class Product extends Model
         $products = $this->select('
             product.id,             
             product.name, 
-            product.category, 
             product.price,
-            product.photo,
             user.username
             ')
         ->join('user', 'product.id_user = user.id')
@@ -41,9 +41,7 @@ class Product extends Model
             $data[] = array(
                 'id' => $product['id'],
                 'name' => $product['name'],
-                'category' => $product['category'],
                 'price' => number_to_currency($product['price'], "IDR", "id", 0),
-                'photo' => base_url('uploads/'.$product['photo']),
                 'owner' => $product['username'],
             );
         }   

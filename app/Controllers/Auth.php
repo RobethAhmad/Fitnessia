@@ -55,7 +55,7 @@ class Auth extends BaseController
         if (!$user) {
             return $this->response->setJSON([
                 'status' => false,
-                'response' => 'Account not found'
+                'response' => 'Account not found'   
             ]);         
         }
 
@@ -88,14 +88,14 @@ class Auth extends BaseController
             setcookie('auth', $auth_hash, time() + (86400 * 30), '/');      
         }
 
-
-        // send response
         // return $this->response->setJSON([
         //     'status' => true,
         //     'response' => 'Success Login',
-        //     'redirect' => base_url('product')
+        //     'redirect' => base_url('homepage')
         // ]);     
-       
+
+        return redirect()->to(base_url('homepage'));
+
     }
 
     public function index_register()
@@ -163,7 +163,7 @@ class Auth extends BaseController
         //     'redirect' => base_url('product')
         // ]); 
 
-        return view('homepage');
+        return redirect()->to(base_url('login'));
     }     
 
     public function updateUserLevel()

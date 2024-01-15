@@ -56,12 +56,11 @@
                         <nav class="primary-menu">
 
                             <ul class="menu-container one-page-menu">
-                                <li class="menu-item current"><a class="menu-link" href="/dashadmin"
-                                        data-href="#header">
+                                <li class="menu-item current"><a class="menu-link" href="<?= base_url('dashadmin')  ?>">
                                         <div>Beranda</div>
                                     </a></li>
                                 <!-- <li class="menu-item"><a class="menu-link" href="#" data-href="#section-features"><div>Features</div></a></li> -->
-                                <li class="menu-item"><a class="menu-link" href="/pricing" data-href="#section-pricing">
+                                <li class="menu-item"><a class="menu-link" href="#" data-scrollto="#section-Pricing">
                                         <div>Harga</div>
                                     </a></li>
                                 <li class="menu-item"><a class="menu-link" href="#" data-href="#section-testimonials">
@@ -147,38 +146,29 @@
                                                 Konsultasi GYM Trainer Online
                                                 <br>
                                                 <br>
-
+                                                <?php if (!session()->auth): ?>
+                                                <a href="<?= base_url('login')?>"
+                                                    class="button button-3d button-red button-xlarge mb-0">Beli
+                                                    Sekarang</a>
+                                                <?php else: ?>
+                                                <button id="pay-button" target="_blank" data-scrollto="#section-pricing"
+                                                    class="button button-3d button-red button-xlarge mb-0">Beli
+                                                    Sekarang</button>
+                                                <?php endif ?>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col" style="text-align: center; border: 3px solid #ccc;  margin: 1cm;">
                                     <div style="padding: 10px;">
-                                        <h2>Menengah</h2><br><br>
+                                        <h2>Menengah</h2><br>
+                                        <h3><del>Rp.40.000</del></h3>
                                         <h3>Rp.25.000</h3>
                                         <div>
-                                            <div style="padding: 2mm;"><br><br>
+                                            <div style="padding: 2mm;"><br>
                                                 Gratis 1x tiket masuk GYM
                                                 <br>
                                                 Video Tutorial Menengah
-                                                <br>
-                                                Konsultasi GYM Trainer Online
-                                                <br>
-                                                <br>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col" style="text-align: center; border: 3px solid #ccc; margin: 1cm;">
-                                    <div style="padding: 10px;">
-                                        <h2>Ahli</h2><br><br>
-                                        <h3>Rp.40.000</h3>
-                                        <div>
-                                            <div style="padding: 2mm;"><br><br>
-                                                Gratis 1x tiket masuk GYM
-                                                <br>
-                                                Video Tutorial Ahli
                                                 <br>
                                                 Konsultasi GYM Trainer Online
                                                 <br>
@@ -192,13 +182,33 @@
                                                     class="button button-3d button-red button-xlarge mb-0">Beli
                                                     Sekarang</button>
                                                 <?php endif ?>
-                                                <!-- <button id="pay-button" target="_blank" data-scrollto="#section-pricing"
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col" style="text-align: center; border: 3px solid #ccc; margin: 1cm;">
+                                    <div style="padding: 10px;">
+                                        <h2>Ahli</h2><br>
+                                        <h3><del>Rp.60.000</del></h3>
+                                        <h3>Rp.40.000</h3>
+                                        <div>
+                                            <div style="padding: 2mm;"><br>
+                                                Gratis 1x tiket masuk GYM
+                                                <br>
+                                                Video Tutorial Ahli
+                                                <br>
+                                                Konsultasi GYM Trainer Online
+                                                <br>
+                                                <br>
+                                                <?php if (!session()->auth): ?>
+                                                <a href="<?= base_url('login')?>"
                                                     class="button button-3d button-red button-xlarge mb-0">Beli
-                                                    Sekarang</button> -->
-                                                <!-- Tambahkan link di dalam view homepage -->
-                                                <!-- <a href="/update-user-level">Update User Level</a> -->
-
-
+                                                    Sekarang</a>
+                                                <?php else: ?>
+                                                <button id="paybutton" target="_blank" data-scrollto="#section-pricing"
+                                                    class="button button-3d button-red button-xlarge mb-0">Beli
+                                                    Sekarang</button>
+                                                <?php endif ?>
                                             </div>
                                         </div>
                                     </div>
@@ -443,13 +453,14 @@
     </script>
     </script>
     <script type="text/javascript">
-    document.getElementById('pay-button').onclick = function() {
+    document.getElementById('paybutton').onclick = function() {
         // SnapToken acquired from previous step
         snap.pay('<?=$snapToken?>', {
             // Optional
             onSuccess: function(result) {
                 /* You may add your own js here, this is just example */
                 // document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
+                console.log(JSON.stringify(result, null, 2));
                 // Panggil URL untuk memperbarui level pengguna
                 fetch('/update-user-level', {
                         method: 'POST',
@@ -489,6 +500,22 @@
             }
         });
     };
+
+    $('#paybutton').click(function(e) {
+        e.preventDefault();
+        $.ajax({
+            type: "post",
+            url: "/homepage",
+            data: {
+
+            },
+            dataType: "json",
+            success: function(response) {
+
+            }
+
+        });
+    });
     </script>
 
 

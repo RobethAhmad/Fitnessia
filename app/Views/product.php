@@ -1,3 +1,34 @@
+<!-- bootsrap -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0-beta1/js/bootstrap.bundle.min.js"
+    integrity="sha512-ndrrR94PW3ckaAvvWrAzRi5JWjF71/Pw7TlSo6judANOFCmz0d+0YE+qIGamRRSnVzSvIyGs4BTtyFMm3MT/cg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<!-- jquery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+    integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<!-- bootbox -->
+<style type="text/css">
+/* bootbox clos-button fix */
+.bootbox-close-button {
+    box-sizing: content-box;
+    color: #000 !important;
+    opacity: initial !important;
+    border: 0;
+    border-radius: 0.25rem;
+    background: none;
+    font-size: 24px !important;
+    font-weight: bold;
+    padding: 0;
+    margin: 0;
+    float: initial !important
+}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.5.2/bootbox.min.js"
+    integrity="sha512-RdSPYh1WA6BF0RhpisYJVYkOyTzK4HwofJ3Q7ivt/jkpW6Vc8AurL1R+4AUcvn9IwEKAPm/fk7qFZW3OuiUDeg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 <!-- bootstrap-table -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.20.2/bootstrap-table.min.css"
     integrity="sha512-HIPiLbxNKmx+x+VFnDHICgl1nbRzW3tzBPvoeX0mq9dWP9H1ZGMRPXfYsHhcJS1na58bzUpbbfpQ/n4SIL7Tlw=="
@@ -42,6 +73,47 @@
         </div>
     </div>
 </main>
+
+<!-- bootsrap -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0-beta1/js/bootstrap.bundle.min.js"
+    integrity="sha512-ndrrR94PW3ckaAvvWrAzRi5JWjF71/Pw7TlSo6judANOFCmz0d+0YE+qIGamRRSnVzSvIyGs4BTtyFMm3MT/cg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<!-- jquery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+    integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<!-- bootbox -->
+<style type="text/css">
+/* bootbox clos-button fix */
+.bootbox-close-button {
+    box-sizing: content-box;
+    color: #000 !important;
+    opacity: initial !important;
+    border: 0;
+    border-radius: 0.25rem;
+    background: none;
+    font-size: 24px !important;
+    font-weight: bold;
+    padding: 0;
+    margin: 0;
+    float: initial !important
+}
+</style>
+
+<script>
+let base_url = '<?= base_url()  ?>',
+    current_url = '<?= current_url()  ?>';
+
+// setting
+xsetting = {
+    spinner: ` <div class="spinner-border spinner-border-sm button-spinner" role="status"></div>`
+}
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.5.2/bootbox.min.js"
+    integrity="sha512-RdSPYh1WA6BF0RhpisYJVYkOyTzK4HwofJ3Q7ivt/jkpW6Vc8AurL1R+4AUcvn9IwEKAPm/fk7qFZW3OuiUDeg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 
 <!-- bootstrap-table -->
@@ -146,19 +218,8 @@ $table.on('load-success.bs.table', function() {
                             </div>
 
                             <div class="mb-3">
-                                <label class="form-label text-capitalize">category</label>
-                                <input value="${data.response.category}" name="category" type="text" class="form-control">
-                            </div>
-
-                            <div class="mb-3">
                                 <label class="form-label text-capitalize">price</label>
                                 <input value="${data.response.price}" name="price" type="number" class="form-control">
-                            </div>
-
-                            <div class="mb-3">
-                                <label class="form-label text-capitalize">new photo</label>
-                                <input value="${data.response.photo}" name="previous_photo" type="hidden" class="form-control">
-                                <input name="photo" type="file" class="form-control">
                             </div>
 
                             <input value="${data.response.hash}" name="hash" type="hidden" class="form-control">
@@ -176,7 +237,7 @@ $table.on('load-success.bs.table', function() {
                             onShown: function() {
 
                                 $("input[name=name]", $("#form-product"))
-                                .focus();
+                                    .focus();
 
                                 formProduct(dialog, 'update');
                             }
@@ -239,7 +300,7 @@ $table.on('load-success.bs.table', function() {
                             if (data.status) {
                                 $table.bootstrapTable('refresh');
                                 dialog.modal(
-                                'hide'); // hide modal after get success response
+                                    'hide'); // hide modal after get success response
                             }
                         })
                         .fail(function(xhr, statusText, errorThrown) {
@@ -353,18 +414,8 @@ $("#create-product").on("click", function(e) {
         </div>
 
         <div class="mb-3">
-            <label class="form-label text-capitalize">category</label>
-            <input name="category" type="text" class="form-control">
-        </div>
-
-        <div class="mb-3">
             <label class="form-label text-capitalize">price</label>
             <input name="price" type="number" class="form-control">
-        </div>
-
-        <div class="mb-3">
-            <label class="form-label text-capitalize">photo</label>
-            <input name="photo" type="file" class="form-control">
         </div>
 
         <button type="submit" class="btn btn-outline-primary btn-submit">Submit</button>

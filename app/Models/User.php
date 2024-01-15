@@ -8,10 +8,11 @@ class User extends Model
 {
     protected $table            = 'user';
     protected $primaryKey       = 'id';
-    protected $level            = 'leveluser';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $protectFields    = false; 
+
+    protected $allowedFields    = ['username', 'email', 'password', 'leveluser'];
 
     // Dates
     protected $useTimestamps = true;
